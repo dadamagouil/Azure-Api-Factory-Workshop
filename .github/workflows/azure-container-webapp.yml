@@ -27,7 +27,7 @@
 name: Build and deploy a container to an Azure Web App
 
 env:
-  AZURE_WEBAPP_NAME: azure-api-factory-workshop  # set this to the name of your Azure Web App
+  AZURE_WEBAPP_NAME: webapp-java-azure-intro  # set this to the name of your Azure Web App
 
 on:
   push:
@@ -75,14 +75,14 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Lowercasethe repo nameand username
+      - name: Lowercase the repo name and username
         run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
-       
+
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_SPN_CREDENTIALS }}
-       
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
